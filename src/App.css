@@ -6,6 +6,16 @@ html, body {
   min-height: 100vh;
 }
 
+/* Global styling */
+body {
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+}
+
 .home-container {
     display: flex;
     align-items: center;
@@ -23,12 +33,14 @@ html, body {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 15px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
   
   .home-tagline {
     font-size: 1.2rem;
     font-style: italic;
-    color: grey;
+    color: #cccccc;
     margin-bottom: 40px;
   }
   
@@ -73,9 +85,11 @@ html, body {
   .write-note-container {
     max-width: 600px;
     margin: 80px auto;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 30px 40px;
     font-family: 'Poppins', sans-serif;
   }
@@ -83,7 +97,7 @@ html, body {
   .write-note-title {
     text-align: center;
     font-size: 1.8rem;
-    color: #2563eb;
+    color: #ffffff;
     margin-bottom: 25px;
   }
   
@@ -95,24 +109,31 @@ html, body {
   
   .write-note-form label {
     font-weight: 600;
-    color: #374151;
+    color: #ffffff;
     margin-bottom: 8px;
   }
   
   .write-note-form input,
   .write-note-form textarea {
-    border: 1.5px solid #cbd5e1;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     padding: 10px 12px;
     font-size: 1rem;
     outline: none;
     transition: border-color 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
   }
   
   .write-note-form input:focus,
   .write-note-form textarea:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 4px rgba(37, 99, 235, 0.3);
+    border-color: #facc15;
+    box-shadow: 0 0 4px rgba(250, 204, 21, 0.3);
+  }
+  
+  .write-note-form input::placeholder,
+  .write-note-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
   }
   
   .submit-btn {
@@ -136,42 +157,66 @@ html, body {
   }
   
 
-  /* Card styling */
+  /* Navbar styling */
+.navbar {
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #facc15 !important;
+  transition: color 0.3s ease;
+}
+
+/* Card styling */
 .note-card {
   border-radius: 12px;
   transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .note-card:hover {
   transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .note-badge {
   position: absolute;
-  top: -8px;        /* move slightly up */
-  right: 10px;      /* keep inside card */
+  top: -8px;
+  right: 10px;
   font-size: 0.75rem;
   padding: 6px 10px;
-  z-index: 1;       /* ensures it's above other content */
+  z-index: 1;
 }
 
 /* Title and description */
 .note-title {
-  color: #007bff; /* Bootstrap primary */
+  color: #ffffff;
 }
 
 .note-desc {
-  color: #6c757d; /* Bootstrap muted text */
+  color: #cccccc;
 }
 
 /* Icons */
 .icon-btn {
   cursor: pointer;
   transition: transform 0.2s ease;
+  color: #ffffff;
 }
 
 .icon-btn:hover {
   transform: scale(1.2);
+  color: #facc15;
 }
 
 /* Ballpit Background */
@@ -199,17 +244,58 @@ body {
 .write-note-container {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  margin: 10px;
-  padding: 20px;
+}
+.particles-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+/* background wrapper sits behind content */
+.particle-bg-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* prevents canvas from blocking UI clicks */
+  overflow: hidden;
 }
 
-/* Special styling for navbar */
-.navbar {
-  margin: 0;
-  border-radius: 0;
-  backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.95);
+/* default canvas inside Particles should match full size */
+.particle-bg-wrapper canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* content layer above background */
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ensure your main UI elements are above the background */
+.navbar,
+.container,
+.home-container,
+.write-note-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* respect reduced-motion pref: hide background */
+@media (prefers-reduced-motion: reduce) {
+  .particle-bg-wrapper { display: none !important; }
+}
+
+/* mobile safety: hide heavy background on small screens */
+@media (max-width: 768px) {
+  .particle-bg-wrapper { display: none; }
+}
+.ballpit-background canvas {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
