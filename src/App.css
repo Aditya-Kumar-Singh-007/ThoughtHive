@@ -279,9 +279,23 @@ body {
 }
 
 .note-desc {
-  margin: 0;
+  margin: 0 0 1rem 0;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.5;
+}
+
+.note-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.note-date {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
 }
 
 .note-badge {
@@ -653,55 +667,7 @@ body {
   position: relative;
   z-index: 1;
 }
-.particles-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-/* background wrapper sits behind content */
-.particle-bg-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 0;
-  pointer-events: none; /* prevents canvas from blocking UI clicks */
-  overflow: hidden;
-}
 
-/* default canvas inside Particles should match full size */
-.particle-bg-wrapper canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-}
-
-/* content layer above background */
-.content-layer {
-  position: relative;
-  z-index: 1;
-}
-
-/* ensure your main UI elements are above the background */
-.navbar,
-.container,
-.home-container,
-.write-note-container {
-  position: relative;
-  z-index: 2;
-}
-
-/* respect reduced-motion pref: hide background */
-@media (prefers-reduced-motion: reduce) {
-  .particle-bg-wrapper { display: none !important; }
-}
-
-/* mobile safety: hide heavy background on small screens */
-@media (max-width: 768px) {
-  .particle-bg-wrapper { display: none; }
-}
 
 /* Snowy Effect */
 .snow {
@@ -822,6 +788,13 @@ body {
   white-space: pre-wrap;
 }
 
+.note-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
 .note-modal-tag {
   display: inline-block;
   background: linear-gradient(135deg, rgba(250, 204, 21, 0.8), rgba(253, 224, 71, 0.6));
@@ -831,6 +804,67 @@ body {
   font-weight: 600;
   font-size: 0.9rem;
   box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
+}
+
+.note-modal-date {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Loader Styles */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loader-small {
+  padding: 1rem;
+}
+
+.loader-medium {
+  padding: 2rem;
+}
+
+.loader-large {
+  padding: 4rem;
+}
+
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid rgba(250, 204, 21, 0.8);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.loader-small .loader-spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.loader-large .loader-spinner {
+  width: 60px;
+  height: 60px;
+  border-width: 4px;
+}
+
+.loader-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 .ballpit-background canvas {
   width: 100%;

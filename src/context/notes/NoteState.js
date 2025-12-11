@@ -2,25 +2,31 @@ import { useState } from "react";
 import notesContext from "./notesContext";
 
 const NoteState = (props) => {
-  const host = "http://localhost:5000";
+  const host = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
   const initialNotes = [];
 
   const [notes, setNote] = useState(initialNotes);
+  const [loading, setLoading] = useState(false);
 
   // get all notes--------------------------------------------------------
   const fetchNotes = async () => {
-    console.log("fetching all notes");
-    console.log(localStorage.getItem("token"));
-    const response = await fetch(`${host}/api/notes/getallnotes`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      },
-    });
-    const json = await response.json();
-    console.log(json);
-    setNote(json);
+    setLoading(true);
+    try {
+      console.log("fetching all notes");
+      const response = await fetch(`${host}/api/notes/getallnotes`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+      const json = await response.json();
+      setNote(json);
+    } catch (error) {
+      console.error("Error fetching notes:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   //add note
@@ -75,14 +81,14 @@ const NoteState = (props) => {
     // lOgic for edit
     setNote(
       notes.map((note) =>
-        note._id === id ? { ...note, title, description, tag } : note
+        note._id === id ? { ...note, title, description, tags: tag } : note
       )
     );
   };
 
   return (
     <notesContext.Provider
-      value={{ notes, setNote, addnote, deleteNote, fetchNotes, editNote }}
+      value={{ notes, setNote, addnote, deleteNote, fetchNotes, editNote, loading }}
     >
       {props.children}
     </notesContext.Provider>

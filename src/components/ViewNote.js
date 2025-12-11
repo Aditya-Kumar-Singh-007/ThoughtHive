@@ -5,11 +5,12 @@ import notesContext from "../context/notes/notesContext";
 import NoteItem from "./NoteItem";
 import EditNoteBox from "./EditNoteBox";
 import NoteModal from "./NoteModal";
+import Loader from "./Loader";
 
 const ViewNote = () => {
   const navigate = useNavigate();
   const context = useContext(notesContext);
-  const { notes, fetchNotes, editNote } = context;
+  const { notes, fetchNotes, editNote, loading } = context;
   const [showEditBox, setShowEditBox] = useState(false);
   const [currentNote, setCurrentNote] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -68,7 +69,9 @@ const ViewNote = () => {
         </header>
 
         <main className="notes-main">
-          {notes.length === 0 ? (
+          {loading ? (
+            <Loader text="Loading your notes..." />
+          ) : notes.length === 0 ? (
             <div className="notes-empty">
               <div className="empty-ill">✦</div>
               <h3>No notes yet</h3>
@@ -78,9 +81,11 @@ const ViewNote = () => {
           ) : (
             <>
               <section className="notes-grid" aria-live="polite">
-                {notes.map((note) => (
-                  <NoteItem key={note._id} note={note} onEdit={onEdit} onView={onView} />
-                ))}
+                {notes
+                  .sort((a, b) => new Date(b.date) - new Date(a.date))
+                  .map((note) => (
+                    <NoteItem key={note._id} note={note} onEdit={onEdit} onView={onView} />
+                  ))}
               </section>
               <div className="notes-bottom-action">
                 <button

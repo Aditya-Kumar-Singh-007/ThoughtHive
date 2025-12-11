@@ -57,11 +57,11 @@ router.post(
 
     try {
       // --- 🧩 SUBSECTION: Extract Data and Create Note ---
-      const { title, description, tag } = req.body;
+      const { title, description, tags, tag } = req.body;
       const note = new Notes({
         title,
         description,
-        tag,
+        tags: tags || tag,
         user: req.user.id,
       });
 
@@ -87,12 +87,12 @@ router.post(
 router.put("/updatenote/:id", fetchUser, async (req, res) => {
   try {
     // --- 🧩 SUBSECTION: Extract fields to update ---
-    const { title, description, tag } = req.body;
+    const { title, description, tags, tag } = req.body;
     const newNote = {};
 
     if (title) newNote.title = title;
     if (description) newNote.description = description;
-    if (tag) newNote.tag = tag;
+    if (tags || tag) newNote.tags = tags || tag;
 
     // --- 🧩 SUBSECTION: Find the note by ID ---
     const noteId = req.params.id;

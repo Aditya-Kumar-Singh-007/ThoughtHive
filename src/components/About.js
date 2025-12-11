@@ -60,13 +60,13 @@ const About = () => {
           <h3>Developer</h3>
           <div className="developer-info">
             <p className="developer-name">
-              Created by <strong>Aditya Kumar Singh</strong>
+              Created by <strong>{process.env.REACT_APP_DEVELOPER_NAME || "Aditya Kumar Singh"}</strong>
             </p>
 
 
             <div className="contact-links">
               <a
-                href="mailto:2604aditya@gmail.com"
+                href={`mailto:${process.env.REACT_APP_DEVELOPER_EMAIL || "2604aditya@gmail.com"}`}
                 className="contact-link"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -75,7 +75,7 @@ const About = () => {
               </a>
 
               <a
-                href="https://github.com/Aditya-Kumar-Singh-007"
+                href={process.env.REACT_APP_GITHUB_URL || "https://github.com/Aditya-Kumar-Singh-007"}
                 className="contact-link"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -84,7 +84,7 @@ const About = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/aditya-kumar-singh2604"
+                href={process.env.REACT_APP_LINKEDIN_URL || "https://www.linkedin.com/in/aditya-kumar-singh2604"}
                 className="contact-link"
                 rel="noopener noreferrer"
                 target="_blank"
@@ -97,7 +97,7 @@ const About = () => {
 
         {/* FOOTER */}
         <div className="about-footer">
-          <p>© {new Date().getFullYear()} ThoughtHive — Built with ❤️ and curiosity by Aditya.</p>
+          <p>© {new Date().getFullYear()} ThoughtHive — Built with ❤️ and curiosity by {process.env.REACT_APP_DEVELOPER_NAME?.split(' ')[0] || "Aditya"}.</p>
         </div>
       </div>
     </div>
