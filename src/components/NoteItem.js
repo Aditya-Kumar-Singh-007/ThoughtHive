@@ -4,6 +4,10 @@ import notesContext from "../context/notes/notesContext";
 const NoteItem = ({ note, onEdit, onView }) => {
   const { deleteNote } = useContext(notesContext);
 
+  const capitalizeTitle = (title) => {
+    return title.charAt(0).toUpperCase() + title.slice(1);
+  };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const now = new Date();
@@ -37,8 +41,7 @@ const NoteItem = ({ note, onEdit, onView }) => {
   return (
     <article className="note-card" aria-label={note.title || "Note"} onClick={handleCardClick}>
       <div className="note-card-top">
-        <span className="note-badge">{note.tags || note.tag || "General"}</span>
-
+        <h3 className="note-title">{capitalizeTitle(note.title)}</h3>
         <div className="note-actions" role="group" aria-label="Note actions">
           <button
             className="icon-btn icon-edit"
@@ -59,7 +62,7 @@ const NoteItem = ({ note, onEdit, onView }) => {
         </div>
       </div>
 
-      <h3 className="note-title">{note.title}</h3>
+      <span className="note-badge">{note.tags || note.tag || "General"}</span>
       <p className="note-desc">{note.description}</p>
       
       <div className="note-footer">

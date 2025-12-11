@@ -10,49 +10,23 @@ const NoteSubmitModal = ({ noteTitle, showModal, addAnother, viewNote }) => {
     return null;
   }
   return (
-    <div>
-      <div
-        className="modal fade show"
-        tabIndex={-1}
-        role="dialog"
-        style={{
-          display: "block",
-          backgroundColor: "rgba(0,0,0,0.5)", // backdrop effect
-        }
-      } onClick={viewNote}
-      >
-        <div className="modal-dialog" onClick={(e)=>{e.stopPropagation()}}>
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Note Saved !</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <p>{`Your Note with title  ${title} has been saved successfully`}</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-                onClick={addAnother}
-              >
-                Add another
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={viewNote}
-              >
-                View Note
-              </button>
-            </div>
-          </div>
+    <div className="submit-modal-overlay" onClick={viewNote}>
+      <div className="submit-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="submit-modal-header">
+          <h2 className="submit-modal-title">Brilliantly Captured!</h2>
+        </div>
+        <div className="submit-modal-body">
+          <p className="submit-modal-message">
+            Your masterpiece <strong>"{title}"</strong> is now safely stored in your digital sanctuary.
+          </p>
+        </div>
+        <div className="submit-modal-footer">
+          <button className="submit-btn submit-btn-secondary" onClick={addAnother}>
+            Add Another
+          </button>
+          <button className="submit-btn submit-btn-primary" onClick={viewNote}>
+            View Notes
+          </button>
         </div>
       </div>
     </div>

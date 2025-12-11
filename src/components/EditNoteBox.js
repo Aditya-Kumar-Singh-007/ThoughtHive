@@ -11,7 +11,7 @@ const EditNoteBox = ({note, onSave, onCancel}) => {
         id:note._id,
         title: note.title || "",
         description: note.description || "",
-        tag: note.tag || ""
+        tag: note.tags || note.tag || ""
       });
     }
   }, [note]);
@@ -29,62 +29,67 @@ const EditNoteBox = ({note, onSave, onCancel}) => {
 
 
   return (
-    <div className="modal fade show" style={{display: "block", backgroundColor: "rgba(0,0,0,0.5)"}} onClick={onCancel}>
-      <div className="modal-dialog modal-lg" onClick={(e) => e.stopPropagation()}>
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title"> Edit Note</h5>
-            <button type="button" className="btn-close" onClick={onCancel}></button>
-          </div>
-          
-          <div className="modal-body">
-            <form>
-              <div className="mb-3">
-                <label className="form-label">Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="title"
-                  value={editedNote.title}
-                  onChange={handleChange}
-                  placeholder="Enter note title"
-                />
-              </div>
-              
-              <div className="mb-3">
-                <label className="form-label">Description</label>
-                <textarea
-                  className="form-control"
-                  name="description"
-                  rows="4"
-                  value={editedNote.description}
-                  onChange={handleChange}
-                  placeholder="Write your note here..."
-                ></textarea>
-              </div>
-              
-              <div className="mb-3">
-                <label className="form-label">Tag</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="tag"
-                  value={editedNote.tag}
-                  onChange={handleChange}
-                  placeholder="e.g. Personal, Work, Ideas"
-                />
-              </div>
-            </form>
-          </div>
-          
-          <div className="modal-footer">
-            <button type="button" className="btn btn-secondary" onClick={onCancel}>
-              Cancel
-            </button>
-            <button disabled={note.title.length<3 || note.description.length<5} type="button" className="btn btn-primary" onClick={handleSave}>
-              Update Changes
-            </button>
-          </div>
+    <div className="edit-modal-overlay" onClick={onCancel}>
+      <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="edit-modal-header">
+          <h2 className="edit-modal-title">Refine Your Ideas</h2>
+          <p className="edit-modal-tagline">Perfect your thoughts, enhance your story</p>
+          <button className="edit-modal-close" onClick={onCancel}>
+            ×
+          </button>
+        </div>
+        
+        <div className="edit-modal-body">
+          <form>
+            <div className="edit-form-group">
+              <label className="edit-form-label">Title</label>
+              <input
+                type="text"
+                className="edit-form-input"
+                name="title"
+                value={editedNote.title}
+                onChange={handleChange}
+                placeholder="Enter note title"
+              />
+            </div>
+            
+            <div className="edit-form-group">
+              <label className="edit-form-label">Description</label>
+              <textarea
+                className="edit-form-textarea"
+                name="description"
+                rows="4"
+                value={editedNote.description}
+                onChange={handleChange}
+                placeholder="Write your note here..."
+              ></textarea>
+            </div>
+            
+            <div className="edit-form-group">
+              <label className="edit-form-label">Tag</label>
+              <input
+                type="text"
+                className="edit-form-input"
+                name="tag"
+                value={editedNote.tag}
+                onChange={handleChange}
+                placeholder="e.g. Personal, Work, Ideas"
+              />
+            </div>
+          </form>
+        </div>
+        
+        <div className="edit-modal-footer">
+          <button className="edit-btn edit-btn-cancel" onClick={onCancel}>
+            Cancel
+          </button>
+          <button 
+            disabled={editedNote.title.length < 3 || editedNote.description.length < 5} 
+            className="edit-btn edit-btn-save" 
+            onClick={handleSave}
+          >
+            Update Changes
+          </button>
         </div>
       </div>
     </div>

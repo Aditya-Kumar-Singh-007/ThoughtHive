@@ -39,7 +39,8 @@ const WriteNote = () => {
 
   return (
     <div className="write-note-container">
-      <h2 className="write-note-title">📝 Write a New Note</h2>
+      <h2 className="write-note-title">Capture Your Thoughts</h2>
+      <p className="write-note-tagline">Transform ideas into lasting memories</p>
 
       <form className="write-note-form">
         <div className="form-group">
