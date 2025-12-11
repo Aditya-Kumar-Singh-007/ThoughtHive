@@ -13,7 +13,7 @@ const Home = () => {
         <p className="home-tagline">“Capture your ideas before they fade away.”</p>
 
         <div className="home-buttons">
-          <button className="btn write-btn" onClick={() => navigate('/addnote')}>
+          <button className="btn write-btn" onClick={() => {(localStorage.getItem("token"))?navigate('/addnote'):navigate('/login')}}>
             ✍️ Write Note
           </button>
           <Link to="/getallnotes">

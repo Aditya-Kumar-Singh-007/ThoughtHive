@@ -80,7 +80,7 @@ const WriteNote = () => {
           />
         </div>
 
-        <button type="submit" className="submit-btn"  onClick={handleOnClick}>
+        <button disabled={note.title.length<3 || note.description.length<5} type="button" className="submit-btn"  onClick={handleOnClick}>
           Save Note
         </button>
       </form>

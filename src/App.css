@@ -1,3 +1,11 @@
+/* Global styling */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  min-height: 100vh;
+}
+
 .home-container {
     display: flex;
     align-items: center;
@@ -118,6 +126,9 @@
     transition: all 0.3s ease;
     width: 100%;
   }
+  .submit-btn:disabled{
+    background-color: grey;
+  }
   
   .submit-btn:hover {
     background-color: #1d4ed8;
@@ -161,4 +172,44 @@
 
 .icon-btn:hover {
   transform: scale(1.2);
+}
+
+/* Ballpit Background */
+.ballpit-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: auto;
+}
+
+/* Ensure content is above background */
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* Make sure all main content has proper z-index */
+.navbar,
+.container,
+.home-container,
+.write-note-container {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  margin: 10px;
+  padding: 20px;
+}
+
+/* Special styling for navbar */
+.navbar {
+  margin: 0;
+  border-radius: 0;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.95);
 }

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect } from 'react'
+
 
 const EditNoteBox = ({note, onSave, onCancel}) => {
-  const [editedNote, setEditedNote] = useState({title: "", description: "", tag: ""});
+
+  const [editedNote, setEditedNote] = useState({id:"",title: "", description: "", tag: ""});
 
   useEffect(() => {
     if (note) {
       setEditedNote({
+        id:note._id,
         title: note.title || "",
         description: note.description || "",
         tag: note.tag || ""
@@ -14,11 +17,14 @@ const EditNoteBox = ({note, onSave, onCancel}) => {
   }, [note]);
 
   const handleChange = (e) => {
+    
     setEditedNote({...editedNote, [e.target.name]: e.target.value});
   };
 
   const handleSave = () => {
-    onSave(note._id, editedNote.title, editedNote.description, editedNote.tag);
+    console.log("Updating",editedNote)
+    onSave(editedNote.id, editedNote.title, editedNote.description, editedNote.tag);
+    
   };
 
 
@@ -75,8 +81,8 @@ const EditNoteBox = ({note, onSave, onCancel}) => {
             <button type="button" className="btn btn-secondary" onClick={onCancel}>
               Cancel
             </button>
-            <button type="button" className="btn btn-primary" onClick={handleSave}>
-              Save Changes
+            <button disabled={note.title.length<3 || note.description.length<5} type="button" className="btn btn-primary" onClick={handleSave}>
+              Update Changes
             </button>
           </div>
         </div>

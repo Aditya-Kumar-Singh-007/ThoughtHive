@@ -1,7 +1,9 @@
+//New Note adding
+
 import React from "react";
 
 const NoteSubmitModal = ({ noteTitle, showModal, addAnother, viewNote }) => {
-  console.log(noteTitle)
+  
   // Safely handle case where noteTitle might be undefined
   const title = noteTitle? noteTitle.toUpperCase() : "UNTITLED";
   if (!showModal) {

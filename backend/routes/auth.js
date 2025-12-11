@@ -30,7 +30,7 @@ router.post(
     const result = validationResult(req);
     if (!result.isEmpty()) {
       // If there are validation errors, return 400 Bad Request with error details
-      return res.status(400).json({ errors: result.array() });
+      return res.status(400).json({success:false, errors: result.array() });
     }
 
     try {
@@ -40,7 +40,7 @@ router.post(
         // If user already exists, return an error response
         return res
           .status(400)
-          .json({ error: "Sorry, the user already exists." });
+          .json({ success:false,error: "Sorry, the user already exists." });
       }
 
       const salt = await bcrypt.genSalt(10);
@@ -62,7 +62,7 @@ router.post(
       const authToken = jwt.sign(data, JWT_SECRET);
 
       // Send a success response
-      res.status(201).json({ authToken });
+      res.status(201).json({ success:true,authToken });
     } catch (error) {
       // Catch any unexpected errors and log them to the console
       console.error(error.message);
@@ -88,11 +88,11 @@ router.post(
   ],
   async (req, res) => {
     // Validate the request body and check for any errors
-
+    let success=false;
     const result = validationResult(req);
     if (!result.isEmpty()) {
       // If there are validation errors, return 400 Bad Request with error details
-      return res.status(400).json({ errors: result.array() });
+      return res.status(400).json({ success:false,errors: result.array() });
     }
 
     try {
@@ -104,7 +104,8 @@ router.post(
 
       const comparePass = await bcrypt.compare(password, user.password);
       if (!comparePass) {
-        return res.status(400).json({ error: "Invalid Credentials" });
+        
+        return res.status(400).json({success:false, error: "Invalid Credentials" });
       }
       const payload = {
         user: {
@@ -112,7 +113,8 @@ router.post(
         },
       };
       const authToken = jwt.sign(payload, JWT_SECRET);
-      res.status(200).json({ authToken });
+      success=true;
+      res.status(200).json({success, authToken });
       
 
     } catch (error) {
