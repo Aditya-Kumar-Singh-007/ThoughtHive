@@ -1,86 +1,153 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import {Link,useNavigate } from "react-router-dom";
+
+
 
 const SignUp = () => {
-    let Navigate=useNavigate();
-    const [info,setInfo]=useState({name:"",email:"",password:""})
-    const onchange=(e)=>{
-        setInfo({...info,[e.target.name]:e.target.value});
+  const navigate = useNavigate();
+  const [info, setInfo] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const onchange = (e) => {
+    setInfo({ ...info, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    if (!info.name.trim()) {
+      setError("Please enter your name.");
+      return false;
     }
-    const handleSubmitSignUp=async(e)=>{
-        e.preventDefault();
-        console.log("Signing u Up");
-        const response = await fetch('http://localhost:5000/api/auth/createuser', {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              },
-            body: JSON.stringify({ name:info.name,email:info.email,password:info.password}),
-          });
-          const json=await response.json();
-          console.log(json);
-          if(json.success){
-            localStorage.setItem('token',json.authToken);
-            Navigate("/getallnotes")
-          }else{
-            alert("Already Exists please login")
-          }
+    if (!info.email.trim()) {
+      setError("Please enter your email.");
+      return false;
     }
-    
+    if (info.password.length < 5) {
+      setError("Password must be at least 5 characters.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
+  const handleSubmitSignUp = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/createuser", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name: info.name, email: info.email, password: info.password }),
+      });
+
+      const json = await response.json();
+
+      if (json.success) {
+        localStorage.setItem("token", json.authToken);
+        navigate("/getallnotes");
+      } else {
+        // show backend message if available
+        setError(json.error || json.message || "Account could not be created. Maybe this email already exists.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="container d-flex justify-content-center align-items-center"
-      style={{ height: "90vh" }}>
-      <form onSubmit={handleSubmitSignUp}>
-        <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleInputName"
-            name="name"
-            required
-            value={info.name}
-            onChange={onchange}
-            
-          />
-          <label htmlFor="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="exampleInputEmail1"
-            name="email"
-            required
-            value={info.email}
-            onChange={onchange}
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Password
-          </label>
-          <input
-            type="password"
-            name="password"
-            required
-            minLength={5}
-            value={info.password}
-            onChange={onchange}
-            className="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+    <div className="signup-page">
+      <main className="signup-outer" aria-live="polite">
+        <section className="signup-card" role="region" aria-label="Sign up form">
+          <header className="signup-header">
+            <h1 className="signup-title">Create account</h1>
+            <p className="signup-sub">Start your ThoughtHive journey — quick and free.</p>
+          </header>
+
+          <form className="signup-form" onSubmit={handleSubmitSignUp} noValidate>
+            {error && (
+              <div className="signup-error" role="alert">
+                {error}
+              </div>
+            )}
+
+            <label className="form-label">
+              <span className="label-text">Name</span>
+              <input
+                type="text"
+                name="name"
+                value={info.name}
+                onChange={onchange}
+                className="form-input"
+                placeholder="Your name"
+                autoComplete="name"
+                aria-required="true"
+                disabled={loading}
+              />
+            </label>
+
+            <label className="form-label">
+              <span className="label-text">Email</span>
+              <input
+                type="email"
+                name="email"
+                value={info.email}
+                onChange={onchange}
+                className="form-input"
+                placeholder="you@example.com"
+                autoComplete="email"
+                aria-required="true"
+                disabled={loading}
+              />
+            </label>
+
+            <label className="form-label password-label">
+              <span className="label-text">Password</span>
+              <div className="password-row">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={info.password}
+                  onChange={onchange}
+                  className="form-input"
+                  placeholder="At least 5 characters"
+                  autoComplete="new-password"
+                  aria-required="true"
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  className="show-pass-btn"
+                  onClick={() => setShowPassword((s) => !s)}
+                  aria-pressed={showPassword}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  disabled={loading}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </label>
+
+            <div className="form-actions">
+              <button type="submit" className="submit-btn" disabled={loading} aria-busy={loading}>
+                {loading ? "Creating…" : "Create account"}
+              </button>
+            </div>
+          </form>
+
+          <footer className="signup-footer">
+            <small>
+              Already have an account? <Link to="/login">Log in</Link>
+            </small>
+          </footer>
+        </section>
+      </main>
     </div>
   );
 };

@@ -30,6 +30,18 @@ function App() {
           wallBounce={0.8}
           maxVelocity={0.06}
         />
+        <div className="snow">
+          <div className="snowflake">❄</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❄</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❄</div>
+          <div className="snowflake">❅</div>
+          <div className="snowflake">❆</div>
+          <div className="snowflake">❄</div>
+        </div>
       </div>
       <NoteState>
         <Router>

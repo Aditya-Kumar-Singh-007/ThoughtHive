@@ -1,43 +1,55 @@
 import React, { useContext } from "react";
-import notesContext from '../context/notes/notesContext';
+import notesContext from "../context/notes/notesContext";
 
-const NoteItem = ({ note,id,onEdit}) => {
-  const context = useContext(notesContext);
-  const {deleteNote} = context
- 
+const NoteItem = ({ note, onEdit, onView }) => {
+  const { deleteNote } = useContext(notesContext);
 
+  const handleCardClick = (e) => {
+    // Don't trigger if clicking on action buttons
+    if (e.target.closest('.note-actions')) {
+      return;
+    }
+    onView(note);
+  };
 
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    onEdit(note);
+  };
+
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    deleteNote(note._id);
+  };
 
   return (
-    <div className="col-md-4">
-      <div className="note-card card my-3 shadow-sm border-0 position-relative">
-        {/* Tag badge */}
-        <span className="note-badge badge bg-warning text-dark">
-          {note.tag || "Note"}
-        </span>
+    <article className="note-card" aria-label={note.title || "Note"} onClick={handleCardClick}>
+      <div className="note-card-top">
+        <span className="note-badge">{note.tag || "Note"}</span>
 
-        <div className="card-body">
-          {/* Title and icons */}
-          <div className="d-flex justify-content-between align-items-center">
-            <h5 className="card-title mb-0 note-title">{note.title}</h5>
-            <div>
-              <i
-                className="fa-solid fa-pen-to-square text-primary mx-2 icon-btn"
-                title="Edit Note"
-                onClick={()=>{onEdit(note)}}
-              ></i>
-              <i
-                className="fa-solid fa-trash text-danger mx-2 icon-btn"
-                title="Delete Note" onClick={()=>{deleteNote(note._id)}}
-              ></i>
-            </div>
-          </div>
-
-          {/* Description */}
-          <p className="card-text mt-2 note-desc">{note.description}</p>
+        <div className="note-actions" role="group" aria-label="Note actions">
+          <button
+            className="icon-btn icon-edit"
+            title="Edit note"
+            onClick={handleEditClick}
+            aria-label="Edit note"
+          >
+            ✎
+          </button>
+          <button
+            className="icon-btn icon-delete"
+            title="Delete note"
+            onClick={handleDeleteClick}
+            aria-label="Delete note"
+          >
+            🗑
+          </button>
         </div>
       </div>
-    </div>
+
+      <h3 className="note-title">{note.title}</h3>
+      <p className="note-desc">{note.description}</p>
+    </article>
   );
 };
 
