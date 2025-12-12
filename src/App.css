@@ -111,7 +111,7 @@ html, body {
   /* Mobile responsive styles */
   @media (max-width: 768px) {
     .home-container {
-      height: 85vh;
+      height: 60vh;
       padding: 1rem;
     }
     
@@ -1961,7 +1961,7 @@ body {
 .create-btn-corner {
   position: fixed;
   top: 0;
-  right: 50px;
+  right: 26px;
   z-index: 200;
   background: none;
   border: none;
