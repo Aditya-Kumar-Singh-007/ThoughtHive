@@ -133,66 +133,65 @@ html, body {
     
     .home-tagline {
       font-size: 1rem !important;
-      margin-bottom: 2.5rem !important;
+      margin-bottom: 1.5rem !important;
       padding: 0 1rem;
     }
     
     .home-buttons {
-      gap: 12px;
+      gap: 10px;
     }
     
-    .btn {
-      padding: 0.8rem 1.5rem !important;
-      font-size: 0.9rem !important;
-      min-width: 140px;
+    .write-btn, .view-btn {
+      padding: 0.6rem 1.2rem !important;
+      font-size: 0.8rem !important;
+      min-width: 110px !important;
+      border-radius: 15px !important;
+      letter-spacing: 0.3px !important;
     }
   }
-  
-  .btn {
-    font-family: var(--font-title) !important;
-    padding: 1.2rem 2.5rem !important;
-    font-size: 1.2rem !important;
-    font-weight: var(--fw-bold) !important;
-    border: 2px solid var(--border-color) !important;
-    border-radius: 20px !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    color: #ffffff !important;
-    backdrop-filter: blur(15px) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
-    letter-spacing: 0.8px !important;
-    text-transform: uppercase !important;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
-  }
-  
-  .light-theme .btn {
-    border: 2px solid rgba(59, 130, 246, 0.3) !important;
-    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15) !important;
-    text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
-  }
-  
-  .write-btn {
-    background: linear-gradient(135deg, rgba(250, 204, 21, 0.8), rgba(253, 224, 71, 0.6));
-  }
-  
-  .write-btn:hover {
-    background: linear-gradient(135deg, rgba(250, 204, 21, 0.9), rgba(253, 224, 71, 0.8));
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(250, 204, 21, 0.3);
-  }
-  
-  .view-btn {
-    background: linear-gradient(135deg, rgba(74, 222, 128, 0.8), rgba(134, 239, 172, 0.6));
-  }
-  
-  .view-btn:hover {
-    background: linear-gradient(135deg, rgba(74, 222, 128, 0.9), rgba(134, 239, 172, 0.8));
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(74, 222, 128, 0.3);
-  }
-  
 
+.btn {
+  font-family: var(--font-title) !important;
+  padding: 1.2rem 2.5rem !important;
+  font-size: 1.2rem !important;
+  font-weight: var(--fw-bold) !important;
+  border: 2px solid var(--border-color) !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(15px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+}
 
+.light-theme .btn {
+  border: 2px solid rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15) !important;
+  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
+}
+
+.write-btn {
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.8), rgba(253, 224, 71, 0.6));
+}
+
+.write-btn:hover {
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.9), rgba(253, 224, 71, 0.8));
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(250, 204, 21, 0.3);
+}
+
+.view-btn {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.8), rgba(134, 239, 172, 0.6));
+}
+
+.view-btn:hover {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.9), rgba(134, 239, 172, 0.8));
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(74, 222, 128, 0.3);
+}
 
 /* Write Note.css */
 
