@@ -102,7 +102,7 @@ const Login = () => {
                   value={credentials.password}
                   onChange={onchange}
                   className="form-input"
-                  placeholder="••••••••"
+                  placeholder="Enter Your Password"
                   autoComplete="current-password"
                   aria-required="true"
                   disabled={loading}

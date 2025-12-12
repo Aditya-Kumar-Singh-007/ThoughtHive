@@ -82,18 +82,7 @@ html, body {
     flex-wrap: wrap !important;
   }
   
-  @media (max-width: 768px) {
-    .home-title {
-      font-size: 2.5rem !important;
-      gap: 0.8rem !important;
-      text-align: center !important;
-    }
-    
-    .home-title-icon {
-      width: 45px !important;
-      height: 45px !important;
-    }
-  }
+
   
   .home-title-icon {
     width: 60px;
@@ -117,6 +106,46 @@ html, body {
     display: flex;
     justify-content: center;
     gap: 20px;
+  }
+
+  /* Mobile responsive styles */
+  @media (max-width: 768px) {
+    .home-container {
+      height: 85vh;
+      padding: 1rem;
+    }
+    
+    .home-content {
+      height: 45vh;
+      padding: 15px;
+    }
+    
+    .home-title {
+      font-size: 2.2rem !important;
+      gap: 0.6rem !important;
+      margin-bottom: 0.8rem !important;
+    }
+    
+    .home-title-icon {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .home-tagline {
+      font-size: 1rem !important;
+      margin-bottom: 2.5rem !important;
+      padding: 0 1rem;
+    }
+    
+    .home-buttons {
+      gap: 12px;
+    }
+    
+    .btn {
+      padding: 0.8rem 1.5rem !important;
+      font-size: 0.9rem !important;
+      min-width: 140px;
+    }
   }
   
   .btn {
@@ -479,17 +508,28 @@ html, body {
   margin-top: 2rem;
 }
 
-@media (max-width: 1024px) {
+/* Mobile responsive for notes */
+@media (max-width: 768px) {
+  .notes-view-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
   .notes-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .notes-title {
+    font-size: 2.2rem !important;
+  }
+  
+  .notes-sub {
+    font-size: 1rem !important;
   }
 }
 
-@media (max-width: 640px) {
-  .notes-grid {
-    grid-template-columns: 1fr;
-  }
-}
+
 
 .notes-header-content {
   text-align: center;
@@ -553,12 +593,7 @@ html, body {
   box-shadow: 0 8px 24px rgba(250, 204, 21, 0.4);
 }
 
-@media (max-width: 768px) {
-  .notes-header-content {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
+
 
 .notes-bottom-action {
   display: flex;
@@ -796,25 +831,7 @@ html, body {
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .about-container {
-    margin: 1rem;
-    padding: 2rem;
-  }
-  
-  .about-title {
-    font-size: 2rem;
-  }
-  
-  .about-features {
-    grid-template-columns: 1fr;
-  }
-  
-  .contact-links {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+
 
 
 
@@ -829,11 +846,7 @@ html, body {
   pointer-events: none;
 }
 
-@media (max-width: 768px) {
-  .ballpit-background {
-    pointer-events: auto;
-  }
-}
+
 
 /* Ensure content is above background */
 body {
@@ -856,26 +869,7 @@ body {
   pointer-events: auto;
 }
 
-/* Ensure all interactive elements work on mobile */
-@media (max-width: 768px) {
-  button,
-  .btn,
-  .auth-btn,
-  .submit-btn,
-  .hamburger,
-  .create-btn-corner,
-  .nav-links a,
-  input,
-  textarea,
-  .note-card,
-  .icon-btn {
-    position: relative;
-    z-index: 20;
-    pointer-events: auto;
-    -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
-    touch-action: manipulation;
-  }
-}
+
 
 
 /* Snowy Effect */
@@ -1197,6 +1191,51 @@ body {
   opacity: 0.6;
 }
 
+/* Mobile responsive for edit modal */
+@media (max-width: 768px) {
+  .edit-modal-overlay {
+    padding: 0rem;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .edit-modal {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+  }
+  
+  .edit-modal-header {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+  
+  .edit-modal-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .edit-modal-body {
+    padding: 1rem 1.5rem;
+  }
+  
+  .edit-form-input,
+  .edit-form-textarea {
+    padding: 12px 16px !important;
+    font-size: 1rem !important;
+  }
+  
+  .edit-modal-footer {
+    padding: 1rem 1.5rem 1.5rem;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .edit-btn {
+    width: 100%;
+    padding: 12px 16px;
+  }
+}
+
 /* Submit Modal */
 .submit-modal-overlay {
   position: fixed;
@@ -1353,7 +1392,7 @@ body {
   height: 100%;
   pointer-events: none;
 }
-/* Navbar.css - centered capsule navbar */
+/* Navbar.css - responsive navbar */
 
 .modern-nav {
   width: 100%;
@@ -1371,9 +1410,8 @@ body {
   display: flex;
   align-items: center;
   gap: 28px;
-  background: rgba(255, 255, 255, 0.72);
   padding: 10px 22px;
-  border-radius: 999px; /* pill */
+  border-radius: 999px;
   box-shadow: 0 10px 30px rgba(8, 15, 35, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(8px);
@@ -1481,53 +1519,122 @@ body {
   background: #dc2626;
 }
 
-/* Responsive adjustments */
-@media (max-width: 880px) {
+/* Mobile dropdown - hidden by default */
+.nav-dropdown {
+  display: none;
+  position: relative;
+}
+
+.dropdown-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  min-width: 180px;
+  padding: 8px 0;
+  z-index: 100;
+}
+
+/* Dark theme dropdown */
+:root .dropdown-menu {
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.light-theme .dropdown-menu {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 20px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: var(--fw-semibold);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+}
+
+.dropdown-menu a.active {
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  color: #fff;
+  margin: 0 8px;
+  border-radius: 8px;
+}
+
+.dropdown-logout {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-weight: var(--fw-semibold);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.dropdown-logout:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
   .nav-inner {
-    gap: 12px;
-    padding: 8px 16px;
+    justify-content: space-between;
+    max-width: 90%;
+    gap: 0;
   }
+  
   .nav-links {
-    gap: 8px;
+    display: none;
   }
+  
+  .nav-auth {
+    display: none;
+  }
+  
+  .nav-dropdown {
+    display: block;
+  }
+  
   .brand {
-    font-size: 1.05rem;
-  }
-  .nav-auth {
-    gap: 8px;
+    font-size: 1.2rem !important;
   }
 }
 
-@media (max-width: 640px) {
-  .nav-inner {
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-  }
-  
-  .nav-links {
-    display: none !important;
-  }
-  
-  .nav-auth {
-    display: none !important;
-  }
-  
-  .hamburger {
-    display: flex !important;
-  }
-}
 
-/* Small screens: stack links (keeps capsule but more compact) */
-@media (max-width: 520px) {
-  .nav-inner {
-    gap: 8px;
-    padding: 8px 12px;
-  }
-  .nav-links {
-    display: none; /* hide links to save space — assume routes accessible from home */
-  }
-}
 /* Login.css (or paste into App.css) */
 
 /* Page & centering */
@@ -1691,14 +1798,7 @@ body {
   }
 }
 
-/* Responsive */
-@media (max-width: 520px) {
-  .login-card {
-    padding: 18px;
-    border-radius: 12px;
-  }
-  .login-title { font-size: 1.25rem; }
-}
+
 /* SignUp.css - matches the Login visual style */
 
 /* Page & centering */
@@ -1858,14 +1958,7 @@ body {
   }
 }
 
-/* Responsive */
-@media (max-width: 520px) {
-  .signup-card {
-    padding: 18px;
-    border-radius: 12px;
-  }
-  .signup-title { font-size: 1.25rem; }
-}
+
 
 /* Ballpit Canvas Background */
 .ballpit-canvas {
@@ -2080,137 +2173,5 @@ body {
   color: var(--text-secondary);
 }
 
-/* Mobile Navigation Styles */
-@media (max-width: 768px) {
-  .modern-nav {
-    padding: 0 16px;
-  }
-  
-  .nav-inner {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .nav-links {
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
-  
-  .nav-auth {
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-  }
-  
-  .auth-btn {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .brand {
-    font-size: 1.2rem;
-  }
-}
 
-/* Mobile Theme Toggle */
-@media (max-width: 520px) {
-  .create-btn-corner {
-    right: 20px;
-    width: 50px;
-    height: 50px;
-  }
-}
 
-/* General Mobile Improvements */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-  }
-  
-  .container {
-    padding: 0 16px;
-  }
-  
-  /* Make touch targets larger */
-  button, .auth-btn, .nav-links a {
-    min-height: 44px;
-    padding: 12px 16px;
-  }
-}
-/* Mobile Touch Optimization */
-@media (max-width: 768px) {
-  /* Ballpit canvas touch handling */
-  .ballpit-canvas {
-    touch-action: pan-y !important;
-    pointer-events: auto !important;
-  }
-  
-  /* Ensure all UI elements are above ballpit and clickable */
-  .modern-nav,
-  .nav-menu,
-  .hamburger,
-  .create-btn-corner,
-  .login-card,
-  .signup-card,
-  .home-container,
-  .write-note-container,
-  .notes-view-container,
-  .about-container {
-    position: relative;
-    z-index: 100;
-    pointer-events: auto;
-  }
-  
-  /* Make all interactive elements touch-friendly */
-  button,
-  .btn,
-  .auth-btn,
-  .submit-btn,
-  .hamburger,
-  .create-btn-corner,
-  .nav-links a,
-  input,
-  textarea,
-  .note-card,
-  .icon-btn,
-  .show-pass-btn {
-    -webkit-tap-highlight-color: rgba(37, 99, 235, 0.2);
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    position: relative;
-    z-index: 101;
-  }
-  
-  /* Prevent text selection on interactive elements */
-  .nav-links a,
-  .auth-btn,
-  .btn,
-  button {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-}
-/* Navbar Mobile Fix - Keep size, hide content in dropdown */
-@media (max-width: 640px) {
-  .nav-links {
-    display: none;
-  }
-  
-  .nav-auth {
-    display: none;
-  }
-  
-  .nav-menu .nav-links {
-    display: flex;
-  }
-  
-  .nav-menu .nav-auth {
-    display: flex;
-  }
-}

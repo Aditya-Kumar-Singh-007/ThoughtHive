@@ -5,10 +5,13 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLightMode, setIsLightMode] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
+    
+    setIsDropdownOpen(false);
   };
 
   const isActive = (path) => (location.pathname === path ? "active" : "");
@@ -29,6 +32,14 @@ const Navbar = () => {
     localStorage.setItem('theme', newLightMode ? 'light' : 'dark');
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsDropdownOpen(false);
+  };
+
   return (
     <>
       <button onClick={toggleTheme} className="create-btn-corner">
@@ -37,43 +48,75 @@ const Navbar = () => {
           alt={isLightMode ? 'Light mode active' : 'Dark mode active'}
         />
       </button>
-      <nav className="modern-nav" role="navigation" aria-label="Main navigation">
-      <div className="nav-inner">
-        <Link className="brand" to="/">
-          ThoughtHive
-        </Link>
+      <nav className="modern-nav">
+        <div className="nav-inner">
+          <Link className="brand" to="/" onClick={closeDropdown}>
+            ThoughtHive
+          </Link>
 
-        <ul className="nav-links" role="menubar" aria-label="Primary">
-          <li role="none">
-            <Link role="menuitem" className={isActive("/")} to="/">
-              Home
-            </Link>
-          </li>
-          <li role="none">
-            <Link role="menuitem" className={isActive("/about")} to="/about">
-              About
-            </Link>
-          </li>
-        </ul>
+          {/* Desktop Navigation */}
+          <ul className="nav-links">
+            <li>
+              <Link className={isActive("/")} to="/">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link className={isActive("/about")} to="/about">
+                About
+              </Link>
+            </li>
+          </ul>
 
-        <div className="nav-auth" aria-hidden={false}>
-          {!localStorage.getItem("token") ? (
-            <>
-              <Link className="auth-btn" to="/login">
-                Login
-              </Link>
-              <Link className="auth-btn outline" to="/signup">
-                SignUp
-              </Link>
-            </>
-          ) : (
-            <button className="auth-btn logout" onClick={handleLogout}>
-              Logout
+          <div className="nav-auth">
+            {!localStorage.getItem("token") ? (
+              <>
+                <Link className="auth-btn" to="/login">
+                  Login
+                </Link>
+                <Link className="auth-btn outline" to="/signup">
+                  SignUp
+                </Link>
+              </>
+            ) : (
+              <button className="auth-btn logout" onClick={handleLogout}>
+                Logout
+              </button>
+            )}
+          </div>
+
+          {/* Mobile Dropdown */}
+          <div className="nav-dropdown">
+            <button className="dropdown-toggle" onClick={toggleDropdown}>
+              ☰
             </button>
-          )}
+            {isDropdownOpen && (
+              <div className="dropdown-menu">
+                <Link className={isActive("/")} to="/" onClick={closeDropdown}>
+                  Home
+                </Link>
+                <Link className={isActive("/about")} to="/about" onClick={closeDropdown}>
+                  About
+                </Link>
+                {!localStorage.getItem("token") ? (
+                  <>
+                    <Link to="/login" onClick={closeDropdown}>
+                      Login
+                    </Link>
+                    <Link to="/signup" onClick={closeDropdown}>
+                      SignUp
+                    </Link>
+                  </>
+                ) : (
+                  <button className="dropdown-logout" onClick={handleLogout}>
+                    Logout
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     </>
   );
 };
