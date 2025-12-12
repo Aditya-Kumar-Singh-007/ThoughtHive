@@ -741,7 +741,7 @@ const Ballpit = ({ className = '', followCursor = false, colors, ...props }) => 
       }
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props.count]);
 
   useEffect(() => {
     if (spheresInstanceRef.current && colors) {

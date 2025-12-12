@@ -13,6 +13,18 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [isLightTheme, setIsLightTheme] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -63,7 +75,7 @@ function App() {
         background: '#000000'
       }}>
         <Ballpit
-          count={60}
+          count={isMobile ? 30 : 60}
           colors={isLightTheme ? lightColors : darkColors}
           gravity={0.015}
           friction={0.998}
