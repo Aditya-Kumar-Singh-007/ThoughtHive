@@ -2,7 +2,7 @@ import { useState } from "react";
 import notesContext from "./notesContext";
 
 const NoteState = (props) => {
-  const host = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+  const host = process.env.REACT_APP_API_BASE_URL || "https://thoughthive-backend.onrender.com";
   const initialNotes = [];
 
   const [notes, setNote] = useState(initialNotes);
