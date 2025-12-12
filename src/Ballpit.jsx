@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback, useMemo } from 'react';
 import {
   Clock as e,
   PerspectiveCamera as t,
@@ -729,18 +729,20 @@ const Ballpit = ({ className = '', followCursor = false, colors, ...props }) => 
   const canvasRef = useRef(null);
   const spheresInstanceRef = useRef(null);
 
+  const stableProps = useMemo(() => props, [JSON.stringify(props)]);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    spheresInstanceRef.current = createBallpit(canvas, { followCursor, colors, ...props });
+    spheresInstanceRef.current = createBallpit(canvas, { followCursor, colors, ...stableProps });
 
     return () => {
       if (spheresInstanceRef.current) {
         spheresInstanceRef.current.dispose();
       }
     };
-  }, []);
+  }, [followCursor, stableProps]);
 
   useEffect(() => {
     if (spheresInstanceRef.current && colors) {
